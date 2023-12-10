@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <title>Let's PAINT</title>
+      <style>
+        body{
+         text-align: center;
+         background-image: url("bg1.jpg") ;
+         background-size: cover;
+        }
+
+        h1{
+            text-decoration: dotted;
+            text-shadow: 10px;
+            font-family: monospace;
+            color: blue;
+        }
+
+        canvas{
+            background-color: white;
+            border: 5px outset red;
+        }
+      </style>
+  </head>
+  <body>
+    <div>
+     <h1>Paint!!!!!</h1>
+     <canvas id = "myCanvas" width = "1500px" height="500" style = ""></canvas>
+      <span><input type = "text" id = "color" placeholder="color">
+          <input type = "text" id = "radius" placeholder="radius">
+          <input type = "text" id = "width" placeholder="width">
+       </span>
+    </div>
+    <script>
+        var mouseEvent = "empty"
+        var canvas = document.getElementById("myCanvas");
+        var ctx = canvas.getContext("2d");
+        canvas.addEventListener("mousedown", my_mousedown);
+        var color = "red";
+        var width = 10;
+        var radius = 360;
+
+       function my_mousedown(e){
+      color = document.getElementById("color").value;
+      width = document.getElementById("width").value;
+      radius = document.getElementById("radius").value;
+      mouseEvent = "mouseDown";
+      } 
+
+     canvas.addEventListener("mouseleave", my_mouseleave);
+
+     function my_mouseleave(e){
+     mouseEvent = "mouseLeave";
+     }    
+
+     canvas.addEventListener("mouseup", my_mouseup);
+
+     function my_mouseup(e){
+     mouseEvent = "mouseUP";
+     }
+
+     canvas.addEventListener("mousemove", my_mousemove);
+
+     function my_mousemove(e){
+     var current_position_of_mouse_x = e.clientX - canvas.offsetLeft; 
+     var current_position_of_mouse_y = e.clientX - canvas.offsetTop;
+
+     if (mouseEvent == "mouseDoun"){
+     ctx.beginPath();
+     ctx.strokeStyle = color;
+     ctx.lineWidth = width;
+     ctx.arc(current_position_of_mouse_x,current_position_of_mouse_y,radius,0,2*Math.PI)
+     }
+     ctx.stroke();
+    }
+
+    </script>
+   </body>
+</html>
